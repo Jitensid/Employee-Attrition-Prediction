@@ -9,7 +9,7 @@ from frontend.models import *
 
 model = CatBoostClassifier()
 model.load_model(
-    fname=os.path.join(settings.BASE_DIR, "frontend/models/Without_Hyper.h5"),
+    fname=os.path.join(settings.BASE_DIR, "frontend/models/my_model.h5"),
     format="cbm",
 )
 
