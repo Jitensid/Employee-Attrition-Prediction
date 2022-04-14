@@ -16,7 +16,12 @@ const RowButton = ({ value, tableMeta, updateValue }) => {
 				console.log(response.data);
 
 				setShowButton(false);
-				setModelResult(response.data.Score);
+				setModelResult(
+					response.data.class +
+						' ( ' +
+						response.data.probability +
+						' )'
+				);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -32,7 +37,7 @@ const RowButton = ({ value, tableMeta, updateValue }) => {
 
 		const modelInputGetRequestData = Object.assign({}, modelInputData);
 
-		console.log(modelInputGetRequestData);
+		// console.log(modelInputGetRequestData);
 
 		const modelInputGetParameters = {};
 

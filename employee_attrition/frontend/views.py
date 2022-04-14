@@ -9,8 +9,7 @@ from frontend.models import *
 
 model = CatBoostClassifier()
 model.load_model(
-    fname=os.path.join(settings.BASE_DIR, "frontend/models/my_model.h5"),
-    format="cbm",
+    fname=os.path.join(settings.BASE_DIR, "frontend/models/my_model.h5"), format="cbm",
 )
 
 
@@ -36,6 +35,11 @@ def make_prediction(request):
 
             model_params.append(model_param)
 
+        model_probability_score = round(model.predict_proba(model_params)[1], 6)
 
-    return JsonResponse({"Score": int(model.predict(model_params))})
+        prediction_class = float(model.predict(model_params))
+
+    return JsonResponse(
+        {"class": prediction_class, "probability": str(model_probability_score) + " %"}
+    )
 
